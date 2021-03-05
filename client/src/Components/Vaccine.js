@@ -17,7 +17,7 @@ class Vaccine extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {name : null , email : null , state_ : "" , mobile : 0 , age : 0 , pincode : ""}
+        this.state = {name : "" , email : "" , state_ : "" , mobile : "" , age : 0 , pincode : ""}
     }
     handleChange = (e) => {
         e.preventDefault();
@@ -43,22 +43,22 @@ class Vaccine extends React.Component {
                 }
             }
             perc = dist / total;
-            console.log(perc);
+            //console.log(perc);
         })
         .catch(err => {
             console.log("Enter Again!!!!");
             console.log(err);
         })
-
+        
         axios.post('http://127.0.0.1:5000/' , data)
         .then(res => {
-            const user = [this.state.name , this.state.email , this.state.mobile , this.state.state_ , this.state.pincode , res.data , perc];
+            const user = [this.state.name , this.state.email , this.state.mobile , this.state.state_ , this.state.pincode , perc , res.data];
             axios.post('http://127.0.0.1:5000/insert' , user)
             .then(res => {
                 console.log(res);
             })
             .catch(err => {
-
+                console.log(err);
             })
         })
         .catch(err => {
